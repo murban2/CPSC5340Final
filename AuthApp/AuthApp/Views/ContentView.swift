@@ -7,6 +7,7 @@
 
 import SwiftUI
 import Firebase
+import FirebaseAuth
 
 struct ContentView: View {
     
@@ -19,8 +20,21 @@ struct ContentView: View {
                     .imageScale(.large)
                     .foregroundStyle(.tint)
                 Text("You are logged in")
+                Button("Logout") {
+                    logout()
+                }
+                .padding()
             }
             .padding()
+        }
+    }
+    
+    func logout() {
+        do {
+            try Auth.auth().signOut()
+            authVM.isLoggedIn = false
+        } catch {
+            print("Error signing out: \(error.localizedDescription)")
         }
     }
 }

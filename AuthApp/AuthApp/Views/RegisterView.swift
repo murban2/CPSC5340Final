@@ -1,5 +1,5 @@
 //
-//  LoginView.swift
+//  RegisterView.swift
 //  AuthApp
 //
 //  Created by user276433 on 6/17/25.
@@ -7,14 +7,15 @@
 
 import SwiftUI
 
-struct LoginView: View {
+struct RegisterView: View {
     
     @ObservedObject var authVM: AuthViewModel
-    @State private var showRegister = false
+    @State private var showLogin = false
+    
     
     var body: some View {
         VStack(spacing: 20) {
-            Text("Log-In")
+            Text("Register Account")
                 .padding()
             TextField("Email", text: $authVM.email)
                 .textContentType(.emailAddress)
@@ -23,12 +24,13 @@ struct LoginView: View {
                 .autocapitalization(.none)
             
             SecureField("Password", text: $authVM.password)
+                
             
-            Button("Log In") {
-                authVM.login()
-            }
             Button("Register") {
-                showRegister = true
+                authVM.register()
+            }
+            Button("Cancel") {
+                showLogin = true
             }
             
             if !authVM.errorMessage.isEmpty {
@@ -37,8 +39,8 @@ struct LoginView: View {
             }
         }
         .padding()
-        .fullScreenCover(isPresented: $showRegister) {
-            RegisterView(authVM: authVM)
+        .fullScreenCover(isPresented: $showLogin) {
+            LoginView(authVM: authVM)
         }
     }
 }
