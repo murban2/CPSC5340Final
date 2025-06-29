@@ -14,6 +14,11 @@ class AuthViewModel : ObservableObject {
     @Published var errorMessage = ""
     @Published var isLoggedIn = false
     
+    
+    var uid: String? {
+            return Auth.auth().currentUser?.uid
+    }
+    
     func login() {
         errorMessage = ""
         Auth.auth().signIn(withEmail: email, password: password) { result, error in
