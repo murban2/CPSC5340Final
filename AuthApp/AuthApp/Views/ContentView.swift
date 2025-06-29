@@ -15,19 +15,42 @@ struct ContentView: View {
     
     var body: some View {
         if authVM.isLoggedIn {
-            VStack {
-                Image(systemName: "globe")
-                    .imageScale(.large)
-                    .foregroundStyle(.tint)
-                Text("You are logged in")
-                Button("Logout") {
-                    logout()
+            NavigationStack {
+                List {
+                    NavigationLink(destination: ViewDataView(authVM: authVM)) {
+                        Text("View Todays Data")
+                    }
+                    NavigationLink(destination: CreateExerciseView(authVM: authVM)) {
+                        Text("Create Exercise")
+                    }
+                    NavigationLink(destination: LogWorkoutView(authVM: authVM)) {
+                        Text("Log Workout")
+                    }
+                    NavigationLink(destination: LogWeightView(authVM: authVM)) {
+                        Text("Log Weight")
+                    }
+                    NavigationLink(destination: LogCaloriesView(authVM: authVM)) {
+                        Text("Log Calories")
+                    }
+                    NavigationLink(destination: WorkoutView(authVM: authVM)) {
+                        Text("View Workout Data")
+                    }
+                    NavigationLink(destination: WeightView(authVM: authVM)) {
+                        Text("View Weight Data")
+                    }
+                    NavigationLink(destination: CaloriesView(authVM: authVM)) {
+                        Text("View Calorie Data")
+                    }
                 }
-                .padding()
+                    Button("Logout") {
+                        logout()
+                    }
+                    .padding()
+                    .foregroundColor(.red)
+                }
             }
-            .padding()
-        }
     }
+    
     
     func logout() {
         do {
@@ -36,5 +59,6 @@ struct ContentView: View {
         } catch {
             print("Error signing out: \(error.localizedDescription)")
         }
+    
     }
 }
