@@ -48,7 +48,7 @@ struct LogWorkoutView: View {
             Button("Submit") {
                 if sets != "" && weight != "" && reps != "" {
                     let model = WorkoutModel(sets: Int(sets) ?? 0, weight: Double(weight) ?? 0, reps: Double(reps) ?? 0, exercise: selectedExercise)
-                    addOrUpdateWorkoutEntry(filename: "Workout_\(authVM.uid ?? "unknow").json", model: model)
+                    addOrUpdateWorkoutEntry(filename: "Workout_\(authVM.uid ?? "unknown").json", model: model)
                 }
                 
                 dismiss()

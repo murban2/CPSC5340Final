@@ -20,7 +20,7 @@ struct LogCaloriesView: View {
                 .padding()
                 .fontWeight(.bold)
             
-            Text("Current Calories: \(loadTodaysCalories(filename: "Calorie_\(authVM.uid ?? "unknown").json"))")
+            Text("Current Calories: \(String(format: "%.2f", loadTodaysCalories(filename: "Calorie_\(authVM.uid ?? "unknown").json")))")
                 .padding()
             TextField("Enter calories", text: Binding(
                 get: { String(format: "%.2f", calorieInput) },
